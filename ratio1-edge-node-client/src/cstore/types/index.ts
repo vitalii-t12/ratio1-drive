@@ -21,19 +21,26 @@ export interface CStoreHashResponse extends CStoreBaseResponse {
 
 export type ChainStoreValue = string | number | boolean | object | any[]
 
-export interface StatusResponse {
-  [key: string]: any
-  EE_ID?: string
+export interface GetValueRequest {
+  cstoreKey: string
 }
 
-export interface UploadResponse {
-  success: boolean
-  message?: string
-  cid?: string
+export interface SetValueRequest {
+  cstoreKey: string
+  chainstoreValue: ChainStoreValue
 }
 
-export interface DownloadResponse {
-  file?: any
-  file_base64_str?: string
-  filename: string
+export interface HashSetValueRequest {
+  hkey: string
+  key: string
+  value: ChainStoreValue
+}
+
+export interface HashGetValueRequest {
+  hkey: string
+  key: string
+}
+
+export interface HGetAllRequest {
+  hkey: string
 }

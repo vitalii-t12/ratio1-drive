@@ -10,7 +10,9 @@
   "scripts": {
     "build": "tsc --project tsconfig.json",
     "test": "jest",
-    "lint": "eslint src --ext .ts"
+    "lint": "eslint src --ext .ts",
+    "test:e2e:r1fs": "jest src/__tests__/e2e.r1fs.test.ts",
+    "test:e2e:cstore": "jest src/__tests__/e2e.cstore.test.ts"
   },
   "keywords": [
     "ratio1",
