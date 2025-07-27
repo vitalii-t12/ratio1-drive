@@ -1,5 +1,5 @@
-import { CStoreClient } from './cstoreClient'
-import { R1FSClient } from './r1fsClient'
+import { CStoreClient } from './cstore/client'
+import { R1FSClient } from './r1fs/client'
 
 export interface Ratio1EdgeNodeClientOptions {
   cstoreUrl?: string
@@ -25,4 +25,5 @@ export default function createClient (opts?: Ratio1EdgeNodeClientOptions): Ratio
   return new Ratio1EdgeNodeClient(opts)
 }
 
-export * from './types'
+export * from './cstore/types'
+export * from './r1fs/types'

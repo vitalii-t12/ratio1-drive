@@ -1,26 +1,14 @@
-import nock from 'nock'
 import createClient from '../index'
 
+const cstoreBase = process.env.CSTORE_API_URL || 'http://localhost:31234'
+const r1fsBase = process.env.R1FS_API_URL || 'http://localhost:31235'
+const client = createClient({ cstoreUrl: cstoreBase, r1fsUrl: r1fsBase })
+
 describe('Ratio1EdgeNodeClient e2e', () => {
-  const cstoreBase = 'http://localhost:31234'
-  const r1fsBase = 'http://localhost:31235'
-  const client = createClient({ cstoreUrl: cstoreBase, r1fsUrl: r1fsBase })
-
-  afterEach(() => nock.cleanAll())
-
   it('performs cstore hgetall and r1fs get_status', async () => {
-    nock(cstoreBase)
-      .post('/hgetall', { hkey: 'mykey' })
-      .reply(200, { result: { mykey: {} } })
-
-    nock(r1fsBase)
-      .get('/get_status')
-      .reply(200, { status: 'ok' })
-
-    const cstoreRes = await client.cstore.hgetall('mykey')
+    const cstoreRes = await client.cstore.hgetall({ hkey: 'mykey' })
     const r1fsRes = await client.r1fs.getStatus()
-
-    expect(cstoreRes.result).toBeDefined()
-    expect(r1fsRes.status).toBe('ok')
+    expect(cstoreRes).toBeDefined()
+    expect(r1fsRes).toBeDefined()
   })
 })

@@ -14,7 +14,7 @@ describe('CStoreClient', () => {
       .post('/hgetall', { hkey: 'test' })
       .reply(200, { result: { test: { key: 'value' } } })
 
-    const res = await client.cstore.hgetall('test')
+    const res = await client.cstore.hgetall({ hkey: 'test' })
     expect(res.result).toBeDefined()
   })
 })
